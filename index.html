@@ -1,0 +1,123 @@
+<script>
+function computerPlay() {   // Generates Rock, Paper, or Scissors for a CPU Player
+    let cpuPlayer;
+    let randomNum;
+    
+    randomNum = Math.floor(Math.random() * 100); 
+
+    if (randomNum < 33) { 
+        cpuPlayer = 'Rock';   // Rock is > 33
+    } else if ((randomNum > 33) && (randomNum < 66)) { 
+        cpuPlayer = 'Paper';   // Paper is > 33 and < 66
+    } else { 
+        cpuPlayer = 'Scissors';   // Scissors is everything else
+    }
+    
+    alert('The CPU has selected: '+ cpuPlayer);
+    
+    return cpuPlayer;
+}
+
+function getPlayer() {   // Assigns Rock, Paper, or Scissors to a player
+    let player = prompt("Choose your weapon: ", "Choose Rock, Paper, or Scissors");
+    player = player.toLowerCase();
+    
+    switch (player) {
+        case 'rock':
+            player = 'Rock';
+            alert("You have selected: " + player);
+            break;
+        
+        case 'paper':
+            player = 'Paper';
+            alert("You have selected: " + player);
+            break;
+
+        case 'scissors':
+            player = 'Scissors';
+            alert("You have selected: " + player);
+            break;
+
+        default:
+            alert("Please check your spelling and try again.");
+            exit;
+    }
+    
+    return player;
+}
+
+function game() {   // 5 round game
+    let round = 0;
+    let playerOneScore = 0;
+    let cpuPlayerScore = 0;
+    
+    do {
+        let player = getPlayer();
+        let cpu = computerPlay();
+        let score = playRound(player,cpu);
+       
+        if (score == 1) {
+            playerOneScore++;
+        } else if (score == 0) {
+            cpuPlayerScore++;
+        }
+        
+        round++;
+        
+        alert('Round ' + round + ' Score – Player: ' + playerOneScore + ' / CPU: ' + cpuPlayerScore);
+    }
+    while (round < 5);
+
+    function playRound(playerSelection, computerSelection) {   // Plays one Round
+        alert(playerSelection + ' vs. ' + computerSelection + '! Ready...FIGHT!');
+        let result = (playerSelection == computerSelection) ? 'TIE GAME!' :
+        ((playerSelection == 'Rock') && (computerSelection == 'Scissors')) ? 'You WIN! Rock beats Scissors!' :
+        ((playerSelection == 'Rock') && (computerSelection == 'Paper')) ? 'You LOSE! Paper beats Rock!' :
+        ((playerSelection == 'Paper') && (computerSelection == 'Rock')) ? 'You WIN! Paper beats Rock!' :
+        ((playerSelection == 'Paper') && (computerSelection == 'Scissors')) ? 'You LOSE! Scissors beats Paper!' :
+        ((playerSelection == 'Scissors') && (computerSelection == 'Rock')) ? 'You LOSE! Rock beats Scissors!' :
+        ((playerSelection == 'Scissors') && (computerSelection == 'Paper')) ? 'You WIN! Scissors beats Paper!':
+        'Something fucked up!';
+        
+        let playerPoint = (playerSelection == computerSelection) ? -1 :
+        ((playerSelection == 'Rock') && (computerSelection == 'Scissors')) ? 1 :
+        ((playerSelection == 'Rock') && (computerSelection == 'Paper')) ? 0 :
+        ((playerSelection == 'Paper') && (computerSelection == 'Rock')) ? 1 :
+        ((playerSelection == 'Paper') && (computerSelection == 'Scissors')) ? 0 :
+        ((playerSelection == 'Scissors') && (computerSelection == 'Rock')) ? 0 :
+        ((playerSelection == 'Scissors') && (computerSelection == 'Paper')) ? 1 : 
+        'Something fucked up!';
+
+        alert(result);
+        return playerPoint;
+    }
+
+    if (playerOneScore == cpuPlayerScore) {   // Final score results
+        alert('TIE game! No one wins! Waddaluck!');
+    } else if (playerOneScore > cpuPlayerScore) {
+        alert('You WIN the match! ' + playerOneScore + ' points to ' + cpuPlayerScore + ' points.');
+    } else {
+        alert('You LOSE, sucker! ' + playerOneScore + ' points to ' + cpuPlayerScore + ' points.');
+    }
+}
+
+function playOneRound() {   // Plays one Round
+    let playerSelection = getPlayer();
+    let computerSelection = computerPlay();
+
+    alert('Round One FIGHT! ' + playerSelection + ' vs. ' + computerSelection);
+    
+    let result = (playerSelection == computerSelection) ? 'TIE GAME!' :
+    ((playerSelection == 'Rock') && (computerSelection == 'Scissors')) ? 'You WIN! Rock beats Scissors!' :
+    ((playerSelection == 'Rock') && (computerSelection == 'Paper')) ? 'You LOSE! Paper beats Rock!' :
+    ((playerSelection == 'Paper') && (computerSelection == 'Rock')) ? 'You WIN! Paper beats Rock!' :
+    ((playerSelection == 'Paper') && (computerSelection == 'Scissors')) ? 'You LOSE! Scissors beats Paper!' :
+    ((playerSelection == 'Scissors') && (computerSelection == 'Rock')) ? 'You LOSE! Rock beats Scissors!' :
+    ((playerSelection == 'Scissors') && (computerSelection == 'Paper')) ? 'You WIN! Scissors beats Paper!':
+    'Something fucked up!';
+    
+    alert(result);
+    
+    return;
+}
+</script>
