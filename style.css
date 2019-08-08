@@ -1,0 +1,93 @@
+html {
+    background-color: black;
+    font-family: Helvetica;
+    font-size: 13px;
+    color: white;
+}
+
+h1 {
+    padding-top: 20px;
+    font-size: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 16px;
+    text-align: center;   
+    letter-spacing: -0.2px; 
+}
+
+#menu {
+    box-sizing: border-box;
+    background-color: rgb(39, 94, 146);
+    border: 1px dashed rgb(255, 255, 255);
+    border-radius: 5px;
+    margin: 0 auto;
+    padding: 5px 15px;   
+    width: 50%;
+}
+
+.buttonMenu {
+    /* background-color: darkgray; */
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+.buttonSelect {
+    background-color: rgb(0, 92, 121);
+    display: inline-block;
+    border: 2px solid white;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    padding: 10px;
+    line-height: 50px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#weaponChoice {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: rgb(255, 253, 107);
+    text-align: center;   
+    letter-spacing: -0.2px; 
+}
+
+#gameStatus {
+    font-size: 30px;
+    color: rgb(0, 255, 170);
+    text-align: center;   
+    letter-spacing: -0.2px; 
+}
+
+#gameStatus .loser {
+    font-size: 30px;
+    color: rgb(255, 0, 98);
+    text-align: center;   
+    letter-spacing: -0.2px; 
+}
+
+#roundStatus {
+    font-size: 25px;
+    color: rgb(255, 87, 157);
+    text-align: center;   
+    letter-spacing: -0.2px; 
+}
+
+#winnerStatus {
+    font-size: 25px;
+    color: rgb(0, 255, 170);
+    text-align: center;   
+    letter-spacing: -0.2px; 
+}
+
+#winnerStatus .loser {
+    font-size: 25px;
+    color: rgb(255, 0, 98);
+    text-align: center;   
+    letter-spacing: -0.2px; 
+}

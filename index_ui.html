@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Let's play Rock, Paper, Scissors!</h1>
+    <div id="menu">
+        <div class="buttonMenu">
+            <div class="buttonSelect" id="rock">Rock</div> 
+            <div class="buttonSelect" id="paper">Paper</div> 
+            <div class="buttonSelect" id="scissors">Scissors</div> 
+        </div>
+    </div>
+    <h2>Choose your weapon</h2>
+    <div id="weaponChoice"></div>
+    <div id="winnerStatus"></div>
+    <div id="roundStatus"></div>
+    <div id="gameStatus"></div>
+
+<script>
+const status = document.querySelector('#gameStatus');
+const statusText = document.createElement('p');
+const roundinfo = document.querySelector('#roundStatus');
+const roundText = document.createElement('p');
+const versus = document.querySelector('#weaponChoice');
+const versusText = document.createElement('p');
+const winner = document.querySelector('#winnerStatus');
+const winnerText = document.createElement('p');
+let tally;
+let playerOneScore = 0;
+let cpuPlayerScore = 0;
+
+// function playOneRound(playerChoice) {   // Plays one Round
+//     let playerSelection = playerChoice;
+//     let computerSelection = computerPlay();
+
+//     // alert('Round One FIGHT! ' + playerSelection + ' vs. ' + computerSelection);
+    
+//     let result = (playerSelection == computerSelection) ? 'TIE GAME!' :
+//     ((playerSelection == 'Rock') && (computerSelection == 'Scissors')) ? 'You WIN! Rock beats Scissors!' :
+//     ((playerSelection == 'Rock') && (computerSelection == 'Paper')) ? 'You LOSE! Paper beats Rock!' :
+//     ((playerSelection == 'Paper') && (computerSelection == 'Rock')) ? 'You WIN! Paper beats Rock!' :
+//     ((playerSelection == 'Paper') && (computerSelection == 'Scissors')) ? 'You LOSE! Scissors beats Paper!' :
+//     ((playerSelection == 'Scissors') && (computerSelection == 'Rock')) ? 'You LOSE! Rock beats Scissors!' :
+//     ((playerSelection == 'Scissors') && (computerSelection == 'Paper')) ? 'You WIN! Scissors beats Paper!':
+//     'Something fucked up!';
+
+//     // alert(result);
+//     statusText.textContent = result;
+//     statusText.classList.add("#gameStatus");
+//     status.appendChild(statusText);
+    
+//     return result;
+// }
+
+function getPlayer(selection) {   // Assigns Rock, Paper, or Scissors to a player 
+    
+    let player = selection;
+
+    switch (player) {
+        case 'rock':
+            player = 'Rock';
+            break;
+        
+        case 'paper':
+            player = 'Paper';
+            break;
+
+        case 'scissors':
+            player = 'Scissors';
+            break;
+
+        default:
+            alert("Invalid choice. Please try again.");
+            exit;
+    }
+    return player;
+}
+
+function getCPU() {   // Generates Rock, Paper, or Scissors for a CPU Player
+    let cpuPlayer;
+    let randomNum;
+    
+    randomNum = Math.floor(Math.random() * 100); 
+
+    if (randomNum < 33) { 
+        cpuPlayer = 'Rock';   // Rock is > 33
+    } else if ((randomNum > 33) && (randomNum < 66)) { 
+        cpuPlayer = 'Paper';   // Paper is > 33 and < 66
+    } else { 
+        cpuPlayer = 'Scissors';   // Scissors is everything else
+    }
+
+    return cpuPlayer;
+}
+
+function playRound(playerSelection, computerSelection) {   // Plays one Round
+    versusText.textContent = 'Current match: ' + playerSelection + ' vs. ' + computerSelection;
+    versusText.classList.add("#weaponChoice");
+    versus.appendChild(versusText);
+
+    tally = (playerSelection == computerSelection) ? 'tie' :
+    ((playerSelection == 'Rock') && (computerSelection == 'Scissors')) ? 'player' :
+    ((playerSelection == 'Rock') && (computerSelection == 'Paper')) ? 'cpu' :
+    ((playerSelection == 'Paper') && (computerSelection == 'Rock')) ? 'player' :
+    ((playerSelection == 'Paper') && (computerSelection == 'Scissors')) ? 'cpu' :
+    ((playerSelection == 'Scissors') && (computerSelection == 'Rock')) ? 'cpu' :
+    ((playerSelection == 'Scissors') && (computerSelection == 'Paper')) ? 'player' : 
+    'Something fucked up!';
+}
+
+function keepScore () {
+    let round = 0;
+
+    switch (tally) {
+        case 'player':
+            playerOneScore++;
+            winnerText.textContent = 'You WON the match!';
+            winnerText.classList.remove("loser");
+            winner.appendChild(winnerText);   
+            break;
+
+        case 'cpu':
+            cpuPlayerScore++;
+            winnerText.textContent = 'You LOST the match!';
+            winnerText.classList.add("loser");
+            winner.appendChild(winnerText);   
+            break;
+
+        case 'tie':
+            winnerText.textContent = 'TIE!';
+            winnerText.classList.add("loser");
+            winner.appendChild(winnerText);   
+            break;
+
+        default:
+            break;
+    }
+
+    roundText.textContent = 'SCORE [ Player: ' + playerOneScore + ' / CPU: ' + cpuPlayerScore + ' ]';
+    roundText.classList.add('#roundStatus');
+    roundinfo.appendChild(roundText);
+
+    if (playerOneScore == 5) {
+        statusText.textContent = 'You WIN the match! ' + playerOneScore + ' points to ' + cpuPlayerScore + ' points.';
+        // statusText.classList.add("gameStatus");
+        status.appendChild(statusText);
+    } else if (cpuPlayerScore == 5) {
+        statusText.textContent = 'You LOSE, sucker! ' + playerOneScore + ' points to ' + cpuPlayerScore + ' points.';
+        statusText.classList.add("loser");
+        status.appendChild(statusText);
+    }
+}
+
+const playerSelect = document.querySelectorAll('.buttonSelect');
+        playerSelect.forEach((buttonSelect) => {
+        buttonSelect.addEventListener('click', (e) => {
+            playRound(getPlayer(buttonSelect.id),getCPU());
+            keepScore();
+            });
+        });
+
+</script>
+</body>
+</html>
